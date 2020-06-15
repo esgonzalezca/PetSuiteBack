@@ -32,9 +32,6 @@ public class DogDayCareInvoiceController {
     FindDogService findDogService;
 
     @Autowired
-    ChangeStatusRequestPetitionService endCareService;
-
-    @Autowired
     GetAllDataService getAllData;
 
     @Autowired
