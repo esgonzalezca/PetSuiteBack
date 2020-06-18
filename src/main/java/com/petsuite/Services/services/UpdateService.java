@@ -429,6 +429,4 @@ public class UpdateService implements IUpdate {
         return DogWalk_DTO;
     }
 
-    
-
 }
