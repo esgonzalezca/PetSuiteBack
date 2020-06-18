@@ -37,7 +37,7 @@ class LoginServiceTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
+   /* @Test
     void clientLogin()
     {
         InfoUser user = new InfoUser();
@@ -94,5 +94,5 @@ class LoginServiceTest {
 
         assertEquals("token",loginService.clientLogin(user_dto));
 
-    }
+    }*/
 }
