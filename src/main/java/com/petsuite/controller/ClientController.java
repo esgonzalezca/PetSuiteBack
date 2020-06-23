@@ -23,6 +23,7 @@ import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("")
@@ -71,8 +72,13 @@ public class ClientController {
         
         return registerService.createClient(client); }
 
-    @PostMapping("/dogList")
-    public List<Dog> myDogList(@Valid @RequestBody Cadena user){
+    
+    @RequestMapping(value = "/dogList", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Dog> myDogList(final Cadena user, final HttpServletRequest request){
+    
+    
+   
         System.out.println("Post sin tokens");
         return findDogService.myDogList(user);
     }
