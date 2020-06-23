@@ -33,13 +33,13 @@ public class InfoUserController {
     
      @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Object clientLogin(final InfoUser_Dto user, final HttpServletRequest request){
+    public Object clientLogin( @RequestBody InfoUser_Dto user, final HttpServletRequest request){
         return user;
 
    /* @RequestMapping("/login")
     @ResponseBody
     @CrossOrigin(origins = "https://petsuite.netlify.app", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.OPTIONS})
-    public Object clientLogin(@Valid @RequestBody InfoUser_Dto user){ */
+    public Object clientLogin(@Valid InfoUser_Dto user){ */
         
         //return loginService.clientLogin(user); 
     }
