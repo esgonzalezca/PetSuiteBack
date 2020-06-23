@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
@@ -29,12 +28,10 @@ public class InfoUserController {
 
     @GetMapping("/all")
     public List<InfoUser> getAllUsers() { return getAllData.getAllUsers(); }
-    
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ResponseBody
-    public Object clientLogin(final InfoUser_Dto user, final HttpServletRequest request){
 
-    
+    @RequestMapping("/login")
+    @ResponseBody
+    public Object clientLogin(@Valid @RequestBody InfoUser_Dto user){ 
         
         return loginService.clientLogin(user); }
 
