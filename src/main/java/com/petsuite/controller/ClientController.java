@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("apli/clients")
+@RequestMapping("api/clients")
 @CrossOrigin(origins = "https://petsuite.netlify.app", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.OPTIONS})
 public class ClientController {
 
