@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/clients")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@RequestMapping("")
+@CrossOrigin(origins = "https://petsuite.netlify.app", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.OPTIONS})
 public class ClientController {
 
     @Autowired
@@ -58,16 +58,21 @@ public class ClientController {
 
 
     @GetMapping("/all")
-    public List<Client> getAllClients() { return getAllData.getAllClients(); }
+    public List<Client> getAllClients() {
+        System.out.println("Get sin token");
+        return getAllData.getAllClients(); }
 
     @PostMapping("/seeEndedCares")//Retorna una estructura de tipo client vacia si ya esta utilizado el nombre de usuario
     public List<DogDayCareInvoice_Dto> showInovicesByStatus(@Valid @RequestBody CadenaDoble cadena) { return showInvoiceDogCare.showInovicesByStatus(cadena); }
 
     @PostMapping("/load")//Retorna una estructura de tipo client vacia si ya esta utilizado el nombre de usuario
-    public Client_Dto createClient(@Valid @RequestBody Client_Dto client) { return registerService.createClient(client); }
+    public Client_Dto createClient(@Valid @RequestBody Client_Dto client) { 
+        
+        return registerService.createClient(client); }
 
     @PostMapping("/dogList")
     public List<Dog> myDogList(@Valid @RequestBody Cadena user){
+        System.out.println("Post sin tokens");
         return findDogService.myDogList(user);
     }
 
