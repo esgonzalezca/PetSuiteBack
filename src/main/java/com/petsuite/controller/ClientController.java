@@ -63,7 +63,8 @@ public class ClientController {
         return getAllData.getAllClients(); }
 
     @PostMapping("/seeEndedCares")//Retorna una estructura de tipo client vacia si ya esta utilizado el nombre de usuario
-    public List<DogDayCareInvoice_Dto> showInovicesByStatus(@Valid @RequestBody CadenaDoble cadena) { return showInvoiceDogCare.showInovicesByStatus(cadena); }
+    public @ResponseBody
+        List<DogDayCareInvoice_Dto> showInovicesByStatus(@Valid @RequestBody CadenaDoble cadena) { return showInvoiceDogCare.showInovicesByStatus(cadena); }
 
     @PostMapping("/load")//Retorna una estructura de tipo client vacia si ya esta utilizado el nombre de usuario
     public Client_Dto createClient(@Valid @RequestBody Client_Dto client) { 
