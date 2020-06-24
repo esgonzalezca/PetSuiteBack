@@ -77,6 +77,9 @@ public class GetAllDataService implements IGetAllData {
 
     @Override
     public List<WalkInvoice> getAllWalkInvoices() { return walkInvoiceRepository.findAll(); }
+    
+     @Override
+    public Boolean getTypeCare(String user) { return dogDaycareRepository.findById(user).get().getDog_daycare_type(); }
 
     @Override
     public List<DogWalker> getAllWalkers() { return dogWalkerRepository.findAll(); }

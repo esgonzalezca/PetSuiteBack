@@ -20,5 +20,6 @@ public interface IGetAllData {
     List<WalkPetition_Dto> getAllPetitions();
     Optional<DogDaycareInvoice> findInvoiceById(int id);
     List<Integer> getCurrentDogIdListInChargeOfDogDayCare(String user);
+     Boolean getTypeCare(String user) ;
 
 }
