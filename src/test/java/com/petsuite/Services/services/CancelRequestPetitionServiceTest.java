@@ -106,6 +106,7 @@ class CancelRequestPetitionServiceTest {
         walkInvoice.setWalk_invoice_id(1);
         walkInvoice.setDog_id(2);
         walkInvoice.setClient_id("htovars");
+        walkInvoice.setWalk_invoice_status("Aceptar");
 
         when(infoUserRepository.findRoleBySuer(anyString())).thenReturn("ncontreras");
 

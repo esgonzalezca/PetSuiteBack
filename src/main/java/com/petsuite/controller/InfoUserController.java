@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "https://petsuite.netlify.app", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.OPTIONS})
 public class InfoUserController {
 
     @Autowired
@@ -28,10 +29,17 @@ public class InfoUserController {
 
     @GetMapping("/all")
     public List<InfoUser> getAllUsers() { return getAllData.getAllUsers(); }
-
-    @RequestMapping("/login")
+    
+    
+     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Object clientLogin(@Valid @RequestBody InfoUser_Dto user){ 
+    public Object clientLogin( @RequestBody InfoUser_Dto user, final HttpServletRequest request){
+        
+
+   /* @RequestMapping("/login")
+    @ResponseBody
+    @CrossOrigin(origins = "https://petsuite.netlify.app", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.OPTIONS})
+    public Object clientLogin(@Valid @RequestBody InfoUser_Dto user){ */
         
         return loginService.clientLogin(user); }
 

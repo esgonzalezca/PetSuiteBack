@@ -18,5 +18,6 @@ public class Dog_Dto {
     private Integer dog_age;
     private String dog_notes;
     private String client_id;
+    
 
 }
