@@ -75,7 +75,7 @@ public class WalkPetitionController {
         if(respesuta) decision="Aceptada";
         else decision="Denegada";
         createNotificationService.createNotification(new Notification(null, "Tienes una actualización en el precio de tu paseo",
-                "La propuesta del precio del paseo del perro " + walkInvoice_Dto.getDog_name() + " ha sido "+ decision+".", "No leido", walkInvoice_Dto.getDog_walker_id(), null));
+        "La propuesta del precio del paseo del perro " + walkInvoice_Dto.getDog_name() + " ha sido "+ decision+".", "No leido", walkInvoice_Dto.getDog_walker_id(), null));
         return null;
     }
 
