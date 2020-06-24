@@ -47,6 +47,8 @@ public class ClientController {
 
     @Autowired
     FindDogService findDogService;
+    @Autowired
+    GetAllDataService allDataService;
 
     @Autowired
     GetServicesService getServicesService;
@@ -88,7 +90,11 @@ public class ClientController {
     
     @GetMapping("/myServicesAvailables")
     public List<DogDaycareService> getMyServices(@RequestParam(value = "user") String user) { return getServicesService.getMyServices(user); }
+    
+    @GetMapping("/typeOfMyCare")
+    public Boolean getTypeOfCare(@RequestParam(value = "user") String user) { return allDataService.getTypeCare(user); }
 
+    
     @PostMapping("/mypetition")
     public List<WalkPetition> myPetition(@Valid @RequestBody String user){ return requestPetitionService.myPetition(user); }
 
