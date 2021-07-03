@@ -37,30 +37,34 @@ public class LoginService implements ILogin {
                 rs.getString("password"),
                 rs.getString("name"),
                 rs.getString("role"),
+                rs.getString("token"),
                 null
         ));
         InfoUser u;
-        
+        System.out.println((user_password));
         if (!ul.isEmpty()){
             u = ul.get(0);
+            
             if (u.getPassword().equals(user_password)){
                 
+                System.out.println("entraste"+ u.getPassword());
+                
                 if("ROLE_CLIENT".equals(u.getRole())){
-                    
+                    System.out.println("entramos al rol");
                     String sqlC = "SELECT * FROM info_user natural join client where user = ?";
                     List<Client_Dto> ul2= jdbcTemplate.query(sqlC, new Object[]{user.getUser()}, (rs, rowNum) -> new Client_Dto(
                             rs.getString("name"),
                             rs.getString("phone"),
                             rs.getString("e_mail"),
-                            rs.getString("client_address")
+                            rs.getString("client_address"),
+                            rs.getString("token")
                     ));
 
                     if(ul2.get(0)!=null)
                     {
-                        user.setRole(u.getRole());
-                        String token= tokenController.generate(user);
+                        System.out.println("no es nulo");
                         ul2.get(0).setUser(u.getUser());
-                        ul2.get(0).setToken(token);
+                        
                         ul2.get(0).setRole(u.getRole());
 
 

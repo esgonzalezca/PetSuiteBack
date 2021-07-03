@@ -4,12 +4,14 @@ import com.petsuite.Services.dto.Client_Dto;
 import com.petsuite.Services.dto.DogDayCare_Dto;
 import com.petsuite.Services.dto.DogWalker_Dto;
 import com.petsuite.Services.dto.Dog_Dto;
+import com.petsuite.Services.dto.InfoUser_Dto;
 import com.petsuite.Services.model.Client;
 import com.petsuite.Services.model.Dog;
 import com.petsuite.Services.model.DogDaycare;
 import com.petsuite.Services.model.DogWalker;
 import com.petsuite.Services.repository.*;
 import com.petsuite.Services.services.interfaces.IRegister;
+import com.petsuite.controller.TokenController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,10 @@ public class RegisterService implements IRegister {
 
     @Autowired
     DogRepository dogRepository;
+    
+      @Autowired
+    TokenController tokenController;
+
 
     @Override
     public DogWalker_Dto createWalker(DogWalker_Dto dogWalker)
@@ -84,6 +90,11 @@ public class RegisterService implements IRegister {
             realClient.setPhone(client.getClient_phone());
             realClient.setName(client.getClient_name());
             realClient.setE_mail(client.getClient_e_mail());
+            InfoUser_Dto user= new InfoUser_Dto(client.getUser(), client.getPassword(), "ROLE_CLIENT");
+            
+            String token= tokenController.generate(user);
+            
+            realClient.setToken(token);
             clientRepository.save(realClient);
             return client;
         }

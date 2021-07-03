@@ -28,9 +28,15 @@ public class InfoUser {
 
     @NotBlank
     private String name;
+    
+    
+
 
     @NotNull
     private String role;//tipo 1 cliente, tipo 2 paseador, tipo 3 paseador;
+    
+    @NotBlank
+    private String token;
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)

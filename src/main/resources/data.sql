@@ -1,5 +1,5 @@
 insert into info_user (user, e_mail, name, password, phone, role) values ('nicolas', 'ncontrerasn@unal.edu.co', 'Nicolás Contreras', '123','3125896475', 'ROLE_CLIENT');
-insert into info_user (user, e_mail, name, password, phone, role) values ('sergio','esgonzalezca@unal.edu.co', 'Sergio GOnzález', '123', '3215732023', 'ROLE_CLIENT');
+insert into info_user (user, e_mail, name, password, phone, role,token) values ('sergio','esgonzalezca@unal.edu.co', 'Sergio GOnzález', '123', '3215732023', 'ROLE_CLIENT','eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBdXJvbiIsInVzZXJQYXNzd29yZCI6IjEyMyIsInJvbGUiOiJST0xFX0NMSUVOVCIsImV4cCI6MTYyNTMxODc2Nn0.000Q7ANrU52eRaTJ2WhsWn2xh0olZRRYZr2ojcWD_kJYY70xuUCKe3pCk7nwEnEGaQy1wdL-Sd9vX4w2wkzqAQ');
 insert into info_user (user, e_mail, name, password, phone, role) values ('juan','jlozanoc@unal.edu.co', 'Juan Lozano', '123', '3140122037', 'ROLE_CLIENT');
 insert into info_user (user, e_mail, name, password, phone, role) values ('hubert', 'htovars@unal.edu.co', 'Hubert Tovar', '123', '3217785643', 'ROLE_CLIENT');
 insert into info_user (user, e_mail, name, password, phone, role) values ('diego', 'arvelasquezva@unal.edu.co', 'Diego Velásquez', '123', '3165989635', 'ROLE_CLIENT');

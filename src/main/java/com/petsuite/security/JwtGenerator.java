@@ -4,6 +4,7 @@ import com.petsuite.Services.dto.InfoUser_Dto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Date;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,6 +20,7 @@ public class JwtGenerator {
         return Jwts.builder()
                 .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS512, "youtube")
+                .setExpiration(new Date(System.currentTimeMillis() + 600))
                 .compact();
     }
 }
