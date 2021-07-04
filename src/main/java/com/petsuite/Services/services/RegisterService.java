@@ -50,6 +50,13 @@ public class RegisterService implements IRegister {
             realDogWalker.setDog_walker_score((float)3.0);
             realDogWalker.setPhone(dogWalker.getDog_walker_phone());
             realDogWalker.setE_mail(dogWalker.getDog_walker_e_mail());
+            
+            InfoUser_Dto user= new InfoUser_Dto(realDogWalker.getUser(), realDogWalker.getPassword(), "ROLE_DOGWALKER");
+            
+            String token= tokenController.generate(user);
+            
+            realDogWalker.setToken(token);
+            
             dogWalkerRepository.save(realDogWalker);
 
             return dogWalker;
@@ -70,6 +77,13 @@ public class RegisterService implements IRegister {
             realDogDayCare.setDog_daycare_score((float)3.0);
             realDogDayCare.setE_mail(dogDaycare.getDog_daycare_e_mail());
             realDogDayCare.setPhone(dogDaycare.getDog_daycare_phone());
+            
+            
+            InfoUser_Dto user= new InfoUser_Dto(dogDaycare.getUser(), dogDaycare.getPassword(), "ROLE_DOGDAYCARE");
+            
+            String token= tokenController.generate(user);
+            
+            realDogDayCare.setToken(token);
             dogDaycareRepository.save(realDogDayCare);
 
             return dogDaycare;

@@ -22,7 +22,7 @@ public class DogDayCare_Dto {
     public Float dog_daycare_price_base;
     public Float dog_daycare_tax;
 
-    public DogDayCare_Dto(String dog_daycare_e_mail, String dog_daycare_address, Boolean dog_daycare_type, String dog_daycare_phone, Float dog_daycare_score, String dog_daycare_name, Float dog_daycare_price_base, Float dog_daycare_tax) {
+    public DogDayCare_Dto(String dog_daycare_e_mail, String dog_daycare_address, Boolean dog_daycare_type, String dog_daycare_phone, Float dog_daycare_score, String dog_daycare_name, Float dog_daycare_price_base, Float dog_daycare_tax, String token) {
 
         this.dog_daycare_e_mail = dog_daycare_e_mail;
         this.dog_daycare_address = dog_daycare_address;
@@ -32,6 +32,7 @@ public class DogDayCare_Dto {
         this.dog_daycare_name=dog_daycare_name;
         this.dog_daycare_price_base=dog_daycare_price_base;
         this.dog_daycare_tax=dog_daycare_tax;
+        this.token=token;
     }
 
 }

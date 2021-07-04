@@ -18,6 +18,11 @@ public interface InfoUserRepository extends JpaRepository<InfoUser, String>{
     @Modifying
     @Query(value = "UPDATE info_user SET password = ?1 WHERE user = ?2", nativeQuery = true)
     Integer updateUserPassword(String password, String user);
+    
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE info_user SET token = ?1 WHERE user = ?2", nativeQuery = true)
+    Integer updateUserToken(String token, String user);
 
     @Transactional
     @Modifying

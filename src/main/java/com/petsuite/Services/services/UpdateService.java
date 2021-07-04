@@ -4,8 +4,10 @@ import com.petsuite.Services.dto.Client_Dto;
 import com.petsuite.Services.dto.DogDayCare_Dto;
 import com.petsuite.Services.dto.DogWalker_Dto;
 import com.petsuite.Services.dto.Dog_Dto;
+import com.petsuite.Services.dto.InfoUser_Dto;
 import com.petsuite.Services.repository.*;
 import com.petsuite.Services.services.interfaces.IUpdate;
+import com.petsuite.controller.TokenController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,10 @@ public class UpdateService implements IUpdate {
 
     @Autowired
     WalkInvoiceRepository walkInvoiceRepository;
+    
+    @Autowired
+    TokenController tokenController;
+
 
     public Integer updateClientAddress(String user, String address){
 
@@ -46,6 +52,28 @@ public class UpdateService implements IUpdate {
                 int Worked = 0;
 
                 Worked = infoUserRepository.updateUserPassword(password,user);
+
+                return Worked;
+            }
+        }
+
+        return 0;
+
+    }
+    
+    
+    
+    public Integer updateUserToken(String user, String token){
+        
+       
+        
+        if (token!=null)
+        {
+            if(!token.isEmpty())
+            {
+                int Worked = 0;
+
+                Worked = infoUserRepository.updateUserToken(token,user);
 
                 return Worked;
             }
@@ -201,7 +229,12 @@ public class UpdateService implements IUpdate {
 
             if (uppdateReturns!=1)
             {
-                Cli_Dto.setPassword(null);
+            InfoUser_Dto user= new InfoUser_Dto(user_dto.getUser(), user_dto.getPassword(), "ROLE_CLIENT");
+            String token= tokenController.generate(user);
+            updateUserToken(user_dto.getUser(), token);
+            Cli_Dto.setToken(token);
+            
+            Cli_Dto.setPassword(null);
             }
             Cli_Dto.setPassword(null);
 
@@ -238,6 +271,8 @@ public class UpdateService implements IUpdate {
         }
 
         Cli_Dto.setRole(user_dto.getRole());
+        
+        
         Cli_Dto.setToken(user_dto.getToken());
 
         return Cli_Dto;
@@ -320,6 +355,11 @@ public class UpdateService implements IUpdate {
 
             if (uppdateReturns!=1)
             {
+                
+                InfoUser_Dto user= new InfoUser_Dto(user_dto.getUser(), user_dto.getPassword(), "ROLE_DOGDAYCARE");
+            String token= tokenController.generate(user);
+            updateUserToken(user_dto.getUser(), token);
+            DayCare_DTO.setToken(token);
                 DayCare_DTO.setPassword(null);
             }
             DayCare_DTO.setPassword(null);
@@ -397,6 +437,10 @@ public class UpdateService implements IUpdate {
 
             if (uppdateReturns!=1)
             {
+                 InfoUser_Dto user= new InfoUser_Dto(user_dto.getUser(), user_dto.getPassword(), "ROLE_DOGWALKER");
+                String token= tokenController.generate(user);
+                updateUserToken(user_dto.getUser(), token);
+                DogWalk_DTO.setToken(token);
                 DogWalk_DTO.setPassword(null);
             }
             DogWalk_DTO.setPassword(null);

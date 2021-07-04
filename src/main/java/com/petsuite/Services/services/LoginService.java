@@ -62,7 +62,7 @@ public class LoginService implements ILogin {
 
                     if(ul2.get(0)!=null)
                     {
-                        System.out.println("no es nulo");
+                        
                         ul2.get(0).setUser(u.getUser());
                         
                         ul2.get(0).setRole(u.getRole());
@@ -77,13 +77,13 @@ public class LoginService implements ILogin {
                             rs.getString("name"),
                             rs.getString("phone"),
                             rs.getString("e_mail"),
-                            rs.getFloat("dog_walker_score")
+                            rs.getFloat("dog_walker_score"),
+                            rs.getString("token")
                     ));
                     if(ul2.get(0)!=null)
                     {
-                        user.setRole(u.getRole());
-                        String token = tokenController.generate(user);
-                        ul2.get(0).setToken(token);
+                        
+                       
                         ul2.get(0).setUser(u.getUser());
                         ul2.get(0).setRole(u.getRole());
 
@@ -103,14 +103,13 @@ public class LoginService implements ILogin {
 
                             rs.getString("name"),
                             rs.getFloat("dog_daycare_base_price"),
-                            rs.getFloat("dog_daycare_tax")
+                            rs.getFloat("dog_daycare_tax"),
+                            rs.getString("token")
                     ));
 
                     if(ul2.get(0)!=null)
                     {
-                        user.setRole(u.getRole());
-                        String token = tokenController.generate(user);
-                        ul2.get(0).setToken(token);
+                       
                         ul2.get(0).setUser(u.getUser());
                         ul2.get(0).setRole(u.getRole());
                         return ul2.get(0);
