@@ -12,6 +12,9 @@ import com.petsuite.Services.model.DogWalker;
 import com.petsuite.Services.repository.*;
 import com.petsuite.Services.services.interfaces.IRegister;
 import com.petsuite.controller.TokenController;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +39,37 @@ public class RegisterService implements IRegister {
       @Autowired
     TokenController tokenController;
 
+public static String encryptThisString(String input)
+	{
+		try {
+			// getInstance() method is called with algorithm SHA-512
+			MessageDigest md = MessageDigest.getInstance("SHA-512");
 
+			// digest() method is called
+			// to calculate message digest of the input string
+			// returned as array of byte
+			byte[] messageDigest = md.digest(input.getBytes());
+
+			// Convert byte array into signum representation
+			BigInteger no = new BigInteger(1, messageDigest);
+
+			// Convert message digest into hex value
+			String hashtext = no.toString(16);
+
+			// Add preceding 0s to make it 32 bit
+			while (hashtext.length() < 32) {
+				hashtext = "0" + hashtext;
+			}
+
+			// return the HashText
+			return hashtext;
+		}
+
+		// For specifying wrong message digest algorithms
+		catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
     @Override
     public DogWalker_Dto createWalker(DogWalker_Dto dogWalker)
     {
@@ -44,7 +77,7 @@ public class RegisterService implements IRegister {
         {
             DogWalker realDogWalker= new DogWalker(dogWalker.getDog_walker_score(), null);
             realDogWalker.setUser(dogWalker.getUser());
-            realDogWalker.setPassword(dogWalker.getPassword());
+            realDogWalker.setPassword(encryptThisString(dogWalker.getPassword()));
             realDogWalker.setRole("ROLE_DOGWALKER");
             realDogWalker.setName(dogWalker.getDog_walker_name());
             realDogWalker.setDog_walker_score((float)3.0);
@@ -71,7 +104,7 @@ public class RegisterService implements IRegister {
         {
             DogDaycare realDogDayCare= new DogDaycare(dogDaycare.getDog_daycare_address(), dogDaycare.getDog_daycare_type() , dogDaycare.getDog_daycare_score(),dogDaycare.getDog_daycare_price_base(),dogDaycare.getDog_daycare_tax(), null, null);
             realDogDayCare.setUser(dogDaycare.getUser());
-            realDogDayCare.setPassword(dogDaycare.getPassword());
+            realDogDayCare.setPassword(encryptThisString(dogDaycare.getPassword()));
             realDogDayCare.setRole("ROLE_DOGDAYCARE");
             realDogDayCare.setName(dogDaycare.getDog_daycare_name());
             realDogDayCare.setDog_daycare_score((float)3.0);
@@ -98,7 +131,7 @@ public class RegisterService implements IRegister {
         {
             Client realClient=new Client();
             realClient.setUser(client.getUser());
-            realClient.setPassword(client.getPassword());
+            realClient.setPassword(encryptThisString(client.getPassword()));
             realClient.setRole("ROLE_CLIENT");
             realClient.setClient_address(client.getClient_address());
             realClient.setPhone(client.getClient_phone());

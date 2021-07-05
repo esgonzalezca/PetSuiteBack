@@ -4,6 +4,7 @@ import com.petsuite.security.JwtSuccessHandler;
 import com.petsuite.security.JwtAuthenticationEntryPoint;
 import com.petsuite.security.JwtAuthenticationProvider;
 import com.petsuite.security.JwtAuthenticationTokenFilter;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 @Configuration
+@EnableEncryptableProperties
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
 

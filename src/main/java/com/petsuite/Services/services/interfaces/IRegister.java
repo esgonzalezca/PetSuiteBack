@@ -11,5 +11,6 @@ public interface IRegister {
      DogDayCare_Dto createDogDaycare(DogDayCare_Dto dogDaycare); //load de DogDayCare
      Client_Dto createClient(  Client_Dto client); //load de Client
      Dog_Dto createDog( Dog_Dto dog);//Register Dog
+     
 
 }
