@@ -8,6 +8,9 @@ import com.petsuite.Services.dto.InfoUser_Dto;
 import com.petsuite.Services.repository.*;
 import com.petsuite.Services.services.interfaces.IUpdate;
 import com.petsuite.controller.TokenController;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +35,30 @@ public class UpdateService implements IUpdate {
     @Autowired
     TokenController tokenController;
 
+    public static String encryptThisString(String input)
+	{
+		try {
+			// getInstance() method is called with algorithm SHA-512
+			MessageDigest md = MessageDigest.getInstance("SHA-512");
+			// digest() method is called
+			// to calculate message digest of the input string
+			// returned as array of byte
+			byte[] messageDigest = md.digest(input.getBytes());
+			// Convert byte array into signum representation
+			BigInteger no = new BigInteger(1, messageDigest);
+			// Convert message digest into hex value
+			String hashtext = no.toString(16);
+			// Add preceding 0s to make it 32 bit
+			while (hashtext.length() < 32) {
+				hashtext = "0" + hashtext;
+			}
+			// return the HashText
+			return hashtext;
+		}// For specifying wrong message digest algorithms
+		catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
     public Integer updateClientAddress(String user, String address){
 
@@ -51,7 +78,7 @@ public class UpdateService implements IUpdate {
             {
                 int Worked = 0;
 
-                Worked = infoUserRepository.updateUserPassword(password,user);
+                Worked = infoUserRepository.updateUserPassword(encryptThisString(password),user);
 
                 return Worked;
             }
@@ -229,13 +256,16 @@ public class UpdateService implements IUpdate {
 
             if (uppdateReturns!=1)
             {
-            InfoUser_Dto user= new InfoUser_Dto(user_dto.getUser(), user_dto.getPassword(), "ROLE_CLIENT");
-            String token= tokenController.generate(user);
-            updateUserToken(user_dto.getUser(), token);
-            Cli_Dto.setToken(token);
+            
+            
             
             Cli_Dto.setPassword(null);
             }
+            InfoUser_Dto user= new InfoUser_Dto(user_dto.getUser(), user_dto.getPassword(), "ROLE_CLIENT");
+            String token= tokenController.generate(user);
+                System.out.println("el token al actucalizar es: "+ token);
+            updateUserToken(user_dto.getUser(), token);
+            Cli_Dto.setToken(token);
             Cli_Dto.setPassword(null);
 
             uppdateReturns = updateClientAddress(user_dto.getUser(),user_dto.getClient_address());
@@ -356,12 +386,13 @@ public class UpdateService implements IUpdate {
             if (uppdateReturns!=1)
             {
                 
-                InfoUser_Dto user= new InfoUser_Dto(user_dto.getUser(), user_dto.getPassword(), "ROLE_DOGDAYCARE");
+                
+                DayCare_DTO.setPassword(null);
+            }
+            InfoUser_Dto user= new InfoUser_Dto(user_dto.getUser(), user_dto.getPassword(), "ROLE_DOGDAYCARE");
             String token= tokenController.generate(user);
             updateUserToken(user_dto.getUser(), token);
             DayCare_DTO.setToken(token);
-                DayCare_DTO.setPassword(null);
-            }
             DayCare_DTO.setPassword(null);
             uppdateReturns = updateDayCareAddress(user_dto.getUser(),user_dto.getDog_daycare_address());
 
@@ -437,12 +468,13 @@ public class UpdateService implements IUpdate {
 
             if (uppdateReturns!=1)
             {
-                 InfoUser_Dto user= new InfoUser_Dto(user_dto.getUser(), user_dto.getPassword(), "ROLE_DOGWALKER");
+              
+                DogWalk_DTO.setPassword(null);
+            }
+               InfoUser_Dto user= new InfoUser_Dto(user_dto.getUser(), user_dto.getPassword(), "ROLE_DOGWALKER");
                 String token= tokenController.generate(user);
                 updateUserToken(user_dto.getUser(), token);
                 DogWalk_DTO.setToken(token);
-                DogWalk_DTO.setPassword(null);
-            }
             DogWalk_DTO.setPassword(null);
             uppdateReturns = updateName(user_dto.getUser(),user_dto.getDog_walker_name());
 

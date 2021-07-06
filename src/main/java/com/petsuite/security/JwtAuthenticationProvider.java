@@ -33,12 +33,12 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
         
         
          InfoUser_Dto jwtUser=validator.validate(token);
-             System.out.println("el jwtUser es: "+jwtUser);
+             
         if (jwtUser == null) {
             throw new RuntimeException("JWT Token is incorrect");
             
         }
-        System.out.println("no existe la nulidad");
+        
 
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList(jwtUser.getRole());

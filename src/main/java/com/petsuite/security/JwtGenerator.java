@@ -20,7 +20,7 @@ public class JwtGenerator {
         return Jwts.builder()
                 .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS512, "youtube")
-                .setExpiration(new Date(System.currentTimeMillis() + 600))
+                .setExpiration(new Date(System.currentTimeMillis() + 60000))
                 .compact();
     }
 }
